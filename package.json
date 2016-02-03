@@ -1,6 +1,6 @@
 {
   "name": "api-know",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "API Know provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "main": "index.js",
   "readme": "README.md",
