@@ -1,0 +1,25 @@
+{
+  "name": "api-know",
+  "version": "1.0.0",
+  "description": "API Know provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mishkinf/api-know.git"
+  },
+  "keywords": [
+    "API",
+    "Javascript",
+    "Localstorage",
+    "REST"
+  ],
+  "author": "Mishkin Faustini <mishkinf@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mishkinf/api-know/issues"
+  },
+  "homepage": "https://github.com/mishkinf/api-know#readme"
+}
