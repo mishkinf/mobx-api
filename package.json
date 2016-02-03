@@ -5,7 +5,10 @@
   "main": "index.js",
   "readme": "README.md",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf lib/ dist/",
+    "clean-build": "npm run clean && npm run build",
+    "build": "webpack --config webpack.config.js --progress --profile --colors",
+    "build-dist": "npm run build && webpack && uglifyjs --in-source-map dist/api-know.js.map -s dist/api-know.js -o dist/api-know.min.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,12 @@
   "bugs": {
     "url": "https://github.com/mishkinf/api-know/issues"
   },
-  "homepage": "https://github.com/mishkinf/api-know#readme"
+  "homepage": "https://github.com/mishkinf/api-know#readme",
+  "dependencies": {
+    "uglify-js": "^2.6.1",
+    "webpack": "^1.12.12"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.14.1"
+  }
 }
