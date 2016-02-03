@@ -1,6 +1,5 @@
+const { LocalStoreAdapter } = require('./src/local-store-adapter');
+const { RestApiStoreAdapter } = require('./src/rest-api-store-adapter');
 
-exports.printMsg = function() {
-	console.log("This is a test message");
-}
-
-exports
+exports.LocalStoreAdapter = LocalStoreAdapter;
+exports.RestApiStoreAdapter = RestApiStoreAdapter;

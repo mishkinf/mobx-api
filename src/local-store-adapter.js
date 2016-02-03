@@ -1,6 +1,6 @@
 const StoreAdapter = require('store-adapter');
 
-class LocalStoreAdapter extends StoreAdapter {
+export default class LocalStoreAdapter extends StoreAdapter {
     constructor(noun) {
         super();
         this.noun = noun;
