@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "API Know provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "main": "index.js",
+  "readme": "README.md",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
