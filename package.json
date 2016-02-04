@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "description": "API Know provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "main": "index.js",
-  "readme": "README.md",
+  "readme": "https://github.com/mishkinf/api-know/blob/master/README.md",
   "scripts": {
     "clean": "rm -rf lib/ dist/",
     "clean-build": "npm run clean && npm run build",
