@@ -1,19 +1,21 @@
 const StoreAdapter = require('store-adapter');
 
-export default class LocalStoreAdapter extends StoreAdapter {
+class LocalStoreAdapter extends StoreAdapter {
     constructor(noun) {
         super();
         this.noun = noun;
-        
+        this.global_count = 0
+
         localStorage.setItem(this.noun, JSON.stringify([]));
     }
     
     create(item) {
         console.log('creating ', this.noun);
         var currentItems = JSON.parse(localStorage.getItem(this.noun));
-        var insertItem = Object.assign({}, item, {id: currentItems.length});
+        var insertItem = Object.assign({}, item, {id: this.global_count++});
         currentItems.push(insertItem);
         localStorage.setItem(this.noun, JSON.stringify(currentItems));
+        this.read_all();
         return insertItem;
     }
     
@@ -23,12 +25,14 @@ export default class LocalStoreAdapter extends StoreAdapter {
                 
         Object.assign(currentItem, {}, item);
         localStorage.setItem(this.noun, JSON.stringify(currentItems));
+        this.read_all();
         
         return currentItem;
     }
     
     read_all() {
-        return JSON.parse(localStorage.getItem(this.noun));
+        store[this.noun].data = JSON.parse(localStorage.getItem(this.noun)); 
+        return store[this.noun].data;
     }
     
     read(id) {
@@ -43,9 +47,10 @@ export default class LocalStoreAdapter extends StoreAdapter {
     delete(id) {
         console.log('delete');
         var currentItems = JSON.parse(localStorage.getItem(this.noun));
-        var deleteItem = currentItems.filter(function(i) { return item.id == i.id })[0];
-        currentItems = currentItems.splice(currentItems.indexOf(deleteItem), 1);
+        var deleteItem = currentItems.filter(function(item) { return id == item.id })[0];
+        currentItems.splice(currentItems.indexOf(deleteItem), 1);
         localStorage.setItem(this.noun, JSON.stringify(currentItems));
+        this.read_all();
         
         return currentItems;  
     }
