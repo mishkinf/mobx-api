@@ -13,6 +13,13 @@ class StoreAdapter {
         
         const self = this;
         
+        this.store[this.noun] = {
+            data: [],
+            errors: [],
+            isFetching: false,
+            lastRequest: null
+        };
+        
         store[noun].read = function(id) {
             self.read(id); 
         }

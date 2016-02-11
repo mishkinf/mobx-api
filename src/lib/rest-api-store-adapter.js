@@ -5,16 +5,6 @@ class RestApiStoreAdapter extends StoreAdapter {
         super();
         this.url = url;
     }
-    
-    setupAdapter(noun, store) {
-        super.setupAdapter(noun, store);
-        this.store[this.noun] = {
-            data: [],
-            errors: [],
-            isFetching: false,
-            lastRequest: null
-        };
-    }
 
     create(item) {
         const requestStartTime = (new Date()).getTime();

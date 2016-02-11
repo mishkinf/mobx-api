@@ -9,12 +9,6 @@ class LocalStoreAdapter extends StoreAdapter {
     setupAdapter(noun, store) {
         super.setupAdapter(noun, store);
         localStorage.setItem(this.noun, JSON.stringify([]));
-        this.store[this.noun] = {
-            data: [],
-            errors: [],
-            isFetching: false,
-            lastRequest: null
-        };
     }
 
     create(item) {
