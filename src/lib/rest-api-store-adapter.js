@@ -8,6 +8,7 @@ class RestApiStoreAdapter extends StoreAdapter {
     
     setupAdapter(noun, store) {
         super.setupAdapter(noun, store);
+        this.readAll();
     }
 
     create(item) {
