@@ -2,7 +2,7 @@
 
 ## Examples
 
-* Example: Here is an example [introduction](https://github.com/mishkinf/).
+* Example: Look at the [mobservable-api-example](https://github.com/mishkinf/mobservable-api-example).
 
 ## Philosophy
 
