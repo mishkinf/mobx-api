@@ -1,19 +1,21 @@
 import StoreAdapter from './store-adapter';
 
 class LocalStoreAdapter extends StoreAdapter {
-    constructor(noun) {
+    constructor() {
         super();
-        this.noun = noun;
         this.global_count = 0
 
-        localStorage.setItem(this.noun, JSON.stringify([]));
-        
         this.state = {
             data: [],
             errors: [],
             isFetching: false,
             lastRequest: null
         };
+    }
+    
+    setNoun(noun) {
+        this.noun = noun;
+        localStorage.setItem(this.noun, JSON.stringify([]));
     }
     
     data() {

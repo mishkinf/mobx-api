@@ -1,9 +1,8 @@
 import StoreAdapter from './store-adapter';
 
 class RestApiStoreAdapter extends StoreAdapter {
-    constructor(noun, url) {
+    constructor(url) {
         super();
-        this.noun = noun;
         this.url = url;
         this.state = {
             data: [],
@@ -11,6 +10,10 @@ class RestApiStoreAdapter extends StoreAdapter {
             isFetching: false,
             lastRequest: null
         };
+    }
+    
+    setNoun(noun) {
+        this.noun = noun;
     }
     
     data() {

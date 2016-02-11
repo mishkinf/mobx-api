@@ -16,6 +16,6 @@ exports.RegisterNoun = function(noun, store, adapter) {
         throw "Error: ${noun} already defined in this store!";
     }
     
-    adapter.setStore(store);
+    adapter.setNoun(noun);;
     store[noun] = adapter;
 }
