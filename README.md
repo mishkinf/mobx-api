@@ -1,4 +1,5 @@
 # mobservable-api
+Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. 
 
 ## Examples
 
