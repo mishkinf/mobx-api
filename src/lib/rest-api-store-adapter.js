@@ -8,6 +8,7 @@ class RestApiStoreAdapter extends StoreAdapter {
     
     setupAdapter(noun, store) {
         this.noun = noun;
+        this.store = store;
         this.store[this.noun] = {
             data: [],
             errors: [],
@@ -17,7 +18,7 @@ class RestApiStoreAdapter extends StoreAdapter {
     }
     
     data() {
-        return this.state.data;
+        return this.store[this.noun].data;
     }
     
     create(item) {
