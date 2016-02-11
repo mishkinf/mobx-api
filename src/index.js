@@ -1,5 +1,5 @@
-import {RestApiStoreAdapter} from './lib/rest-api-store-adapter';
-import {LocalStoreAdapter} from './lib/local-store-adapter';
+import RestApiStoreAdapter from './lib/rest-api-store-adapter';
+import LocalStoreAdapter from './lib/local-store-adapter';
 
 exports.LocalStore = LocalStoreAdapter;
 exports.RestApiStoreAdapter = RestApiStoreAdapter;
