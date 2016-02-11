@@ -1,10 +1,4 @@
-.tscache
-.settings
-node_modules
+.DS_Store
+node_modules/
 npm-debug.log
-coverage
-notes.md
-lib
-test/babel-tests.js
-test/typescript-tests.js*
-.vscode
+build/

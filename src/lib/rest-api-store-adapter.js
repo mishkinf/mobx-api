@@ -1,6 +1,6 @@
-const StoreAdapter = require('store-adapter');
+import { StoreAdapter } from './store-adapter';
 
-class RestApiStoreAdapter extends StoreAdapter {
+export class RestApiStoreAdapter extends StoreAdapter {
     constructor(noun, url) {
         super();
         this.noun = noun;
@@ -142,3 +142,5 @@ class RestApiStoreAdapter extends StoreAdapter {
         this.delete_item(requestStartTime, id);
     }
 }
+
+export default RestApiStoreAdapter;

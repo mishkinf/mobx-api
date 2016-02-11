@@ -1,8 +1,5 @@
-const { LocalStoreAdapter } = require('./src/local-store-adapter');
-const { RestApiStoreAdapter } = require('./src/rest-api-store-adapter');
-
-exports.LocalStoreAdapter = LocalStoreAdapter;
-exports.RestApiStoreAdapter = RestApiStoreAdapter;
+import RestApiStoreAdapter from './lib/rest-api-store-adapter';
+import LocalStoreAdapter from './lib/local-store-adapter';
 
 exports.registerStoreAdapter = function(store, adapter) {
     store.adapter = adapter;

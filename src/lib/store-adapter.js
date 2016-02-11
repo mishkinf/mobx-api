@@ -7,3 +7,5 @@ class StoreAdapter {
         if(this.delete === undefined) { throw new TypeError('Must override delete method'); }
     }
 }
+
+export default StoreAdapter;
