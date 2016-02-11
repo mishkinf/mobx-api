@@ -13,6 +13,6 @@ exports.RegisterNoun = function(noun, store, adapter) {
         throw "Error: adapter supplied does not extend StoreAdapter"
     }
     
-    adapter.setNoun(noun);
+    adapter.setupAdapter(noun, store);
     store[noun] = adapter;
 };

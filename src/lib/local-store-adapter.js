@@ -4,8 +4,14 @@ class LocalStoreAdapter extends StoreAdapter {
     constructor() {
         super();
         this.global_count = 0
-
-        this.state = {
+    }
+    
+    setupAdapter(noun, store) {
+        this.noun = noun;
+        localStorage.setItem(this.noun, JSON.stringify([]));
+        
+        this.store = store;
+        this.store[this.noun] = {
             data: [],
             errors: [],
             isFetching: false,
@@ -13,13 +19,8 @@ class LocalStoreAdapter extends StoreAdapter {
         };
     }
     
-    setNoun(noun) {
-        this.noun = noun;
-        localStorage.setItem(this.noun, JSON.stringify([]));
-    }
-    
     data() {
-        return this.state.data;
+        return this.store[this.noun].data;
     }
     
     create(item) {
@@ -27,7 +28,7 @@ class LocalStoreAdapter extends StoreAdapter {
         var insertItem = Object.assign({}, item, {id: this.global_count++});
         currentItems.push(insertItem);
         localStorage.setItem(this.noun, JSON.stringify(currentItems));
-        this.state.data = currentItems;
+        this.store[this.noun].data = currentItems;
         
         return insertItem;
     }
@@ -38,14 +39,14 @@ class LocalStoreAdapter extends StoreAdapter {
                 
         Object.assign(currentItem, {}, item);
         localStorage.setItem(this.noun, JSON.stringify(currentItems));
-        this.state.data = currentItems;
+        this.store[this.noun].data = currentItems;
         
         return currentItem;
     }
     
     readAll() {
-        this.state.data = JSON.parse(localStorage.getItem(this.noun)); 
-        return this.state.data;
+        this.store[this.noun].data = JSON.parse(localStorage.getItem(this.noun)); 
+        return this.store[this.noun].data;
     }
     
     read(id) {
@@ -61,7 +62,7 @@ class LocalStoreAdapter extends StoreAdapter {
         var deleteItem = currentItems.filter(function(item) { return id == item.id })[0];
         currentItems.splice(currentItems.indexOf(deleteItem), 1);
         localStorage.setItem(this.noun, JSON.stringify(currentItems));
-        this.state.data = currentItems;
+        this.store[this.noun].data = currentItems;
         
         return currentItems;  
     }

@@ -6,10 +6,6 @@ class StoreAdapter {
         if(this.readAll === undefined) { throw new TypeError('Must override read method'); }
         if(this.delete === undefined) { throw new TypeError('Must override delete method'); }
     }
-    
-    setNoun(noun) {
-        this.noun = noun;
-    }
 }
 
 export default StoreAdapter;
