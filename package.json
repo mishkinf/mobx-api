@@ -1,6 +1,6 @@
 {
   "name": "mobservable-api",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "readme": "https://github.com/mishkinf/mobservable-api/blob/master/README.md",
   "main": "build/index.js",
