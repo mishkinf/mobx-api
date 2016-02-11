@@ -13,23 +13,23 @@ class StoreAdapter {
         
         const self = this;
         
-        this.store.read = function(id) {
+        store[noun].read = function(id) {
             self.read(id); 
         }
         
-        this.store.readAll = function() {
+        store[noun].readAll = function() {
             self.readAll(); 
         }
         
-        this.store.create = function(item) {
+        store[noun].create = function(item) {
             self.create(item);
         }
         
-        this.store.update = function(item) {
+        store[noun].update = function(item) {
             self.update(item);
         }
         
-        this.store.delete = function(id) {
+        store[noun].delete = function(id) {
             self.delete(id);
         }
     }
