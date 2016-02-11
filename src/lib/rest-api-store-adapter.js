@@ -7,7 +7,37 @@ class RestApiStoreAdapter extends StoreAdapter {
     }
     
     setupAdapter(noun, store) {
-        super.setupAdapter(noun, store);
+        this.noun = noun;
+        this.store = store;
+        
+        const self = this;
+        
+        this.store[this.noun] = {
+            data: [],
+            errors: [],
+            isFetching: false,
+            lastRequest: null
+        };
+        
+        store[noun].read = function(id) {
+            self.read(id); 
+        }
+        
+        store[noun].readAll = function() {
+            self.readAll(); 
+        }
+        
+        store[noun].create = function(item) {
+            self.create(item);
+        }
+        
+        store[noun].update = function(item) {
+            self.update(item);
+        }
+        
+        store[noun].delete = function(id) {
+            self.delete(id);
+        }
     }
 
     create(item) {

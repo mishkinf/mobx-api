@@ -7,10 +7,41 @@ class LocalStoreAdapter extends StoreAdapter {
     }
     
     setupAdapter(noun, store) {
-        super.setupAdapter(noun, store);
-        localStorage.setItem(this.noun, JSON.stringify([]));
+        this.noun = noun;
+        this.store = store;
+        
+        const self = this;
+        
+        this.store[this.noun] = {
+            data: [],
+            errors: [],
+            isFetching: false,
+            lastRequest: null
+        };
+        
+        store[noun].read = function(id) {
+            self.read(id); 
+        }
+        
+        store[noun].readAll = function() {
+            self.readAll(); 
+        }
+        
+        store[noun].create = function(item) {
+            self.create(item);
+        }
+        
+        store[noun].update = function(item) {
+            self.update(item);
+        }
+        
+        store[noun].delete = function(id) {
+            self.delete(id);
+        }
+        
+        localStorage.setItem(this.noun, JSON.stringify([]));        
     }
-
+    
     create(item) {
         var currentItems = JSON.parse(localStorage.getItem(this.noun));
         var insertItem = Object.assign({}, item, {id: this.global_count++});
