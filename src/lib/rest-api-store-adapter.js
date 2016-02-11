@@ -1,39 +1,45 @@
 import StoreAdapter from './store-adapter';
 
 class RestApiStoreAdapter extends StoreAdapter {
-    constructor(store, noun, url) {
+    constructor(noun, url) {
         super();
-        this.store = store;
         this.noun = noun;
         this.url = url;
+        this.state = {
+            data: [],
+            errors: [],
+            isFetching: false,
+            lastRequest: null
+        };
+    }
+    
+    data() {
+        return this.state.data;
     }
     
     create(item) {
-        console.log('rest adapter create');
         const requestStartTime = (new Date()).getTime();
         this.post(requestStartTime, item);
     }
     
     update(item) {
-        console.log('rest adapter update');
         this.put(item);
     }
     
     read(id) {
-        console.log('rest adapter read');
+        console.log('WARNING: Read operation of RestApiStoreAdapter not implemented');
     }
     
-    read_all() {
-        console.log('Fetching: ', this.url);
+    readAll() {
         const requestStartTime = (new Date()).getTime();
         this.get(requestStartTime);
     }
     
     post(requestStartTime, item) {
-        this.request_with_payload(requestStartTime, item, 'post');    
+        this.requestWithPayload(requestStartTime, item, 'post');    
     }
     
-    request_with_payload(requestStartTime, item, method) {
+    requestWithPayload(requestStartTime, item, method) {
         var headers = new Headers({'Content-type': 'application/json'});
 
         var endpoint = '';
@@ -53,7 +59,7 @@ class RestApiStoreAdapter extends StoreAdapter {
             body: JSON.stringify({ article: item })
         })
         .then(response => {
-            self.read_all();            
+            self.readAll();            
         })
         .catch((error) => {
             debugger;
@@ -68,12 +74,11 @@ class RestApiStoreAdapter extends StoreAdapter {
     }
     
     put(item) {
-        console.log('putting: ', item);
         const requestStartTime = (new Date()).getTime();
-        this.request_with_payload(requestStartTime, item, 'put');
+        this.requestWithPayload(requestStartTime, item, 'put');
     }
     
-    delete_item(requestStartTime, id) {
+    deleteItem(requestStartTime, id) {
         const self = this;
         
         fetch(this.url + '/' + this.noun + '/' + id,
@@ -85,8 +90,7 @@ class RestApiStoreAdapter extends StoreAdapter {
             }
         })
         .then(response => {
-            // store[this.noun].data.append(item);
-            self.read_all();
+            self.readAll();
         })
         .catch((error) => {
             debugger;
@@ -95,8 +99,6 @@ class RestApiStoreAdapter extends StoreAdapter {
                 console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, self.store[this.noun].lastRequest);
                 return;
             }
-            
-            // do something else
         });
     }
     
@@ -109,13 +111,12 @@ class RestApiStoreAdapter extends StoreAdapter {
                     console.log('STALE SUCCESS RESPONSE', 'this response is older than another response! ', requestStartTime, self.store[this.noun].lastRequest);
                     return;
                 } 
-                console.log('success: ', json[this.noun]);
-                
+        
                 if(json.error != null || json.error != undefined) {
                     throw new Error('Not Found');
                 }
                 
-                self.store[this.noun] = {
+                self.state = {
                     data: json[this.noun],
                     errors: [],
                     isFetching: false,
@@ -130,18 +131,18 @@ class RestApiStoreAdapter extends StoreAdapter {
                     return;
                 }
                 
-                self.store[this.noun] = {
+                self.state = {
                     data: [],
                     errors: error,
-                    isFetching: false
+                    isFetching: false,
+                    lastRequest: null
                 };
             });  
     }
     
     delete(id) {
-        console.log('rest adapter delete');
         const requestStartTime = (new Date()).getTime();
-        this.delete_item(requestStartTime, id);
+        this.deleteItem(requestStartTime, id);
     }
 }
 

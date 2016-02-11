@@ -1,28 +1,21 @@
 import RestApiStoreAdapter from './lib/rest-api-store-adapter';
 import LocalStoreAdapter from './lib/local-store-adapter';
+import StoreAdapter from './lib/store-adapter';
 
 exports.LocalStoreAdapter = LocalStoreAdapter;
 exports.RestApiStoreAdapter = RestApiStoreAdapter;
-exports.registerStoreAdapter = function(store, adapter) {
-    store.adapter = adapter;
+
+exports.RegisterNoun = function(noun, store, adapter) {
+    if(noun == undefined || store == undefined || adapter == undefined) {
+        throw "You must supply a noun, store and adapter. Please refer to mobservable-api documentation!";
+    }
+    if(adapter instanceof StoreAdapter == false) {
+        throw "Error: adapter supplied does not extend StoreAdapter"
+    }
+    if(store[noun] != undefined) {
+        throw "Error: ${noun} already defined in this store!";
+    }
     
-    store.create = function(noun, item) {
-        store.adapter.create(item);
-    };
-
-    store.update = function(noun, item) {
-        store.adapter.update(item);
-    };
-
-    store.read_all = function(noun) {
-        store.adapter.read_all();    
-    };
-
-    store.delete = function(noun, id) {
-        store.adapter.delete(id);
-    };
-
-    store.read = function(noun, id) {
-        store.adapter.read(id);
-    };
-};
+    adapter.setStore(store);
+    store[noun] = adapter;
+}
