@@ -1,4 +1,4 @@
-import { StoreAdapter } from './store-adapter';
+import StoreAdapter from './store-adapter';
 
 export class LocalStoreAdapter extends StoreAdapter {
     constructor(noun) {

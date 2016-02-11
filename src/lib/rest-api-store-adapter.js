@@ -1,4 +1,4 @@
-import { StoreAdapter } from './store-adapter';
+import StoreAdapter from './store-adapter';
 
 export class RestApiStoreAdapter extends StoreAdapter {
     constructor(noun, url) {
