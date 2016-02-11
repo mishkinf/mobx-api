@@ -7,10 +7,8 @@ class LocalStoreAdapter extends StoreAdapter {
     }
     
     setupAdapter(noun, store) {
-        this.noun = noun;
+        super.setupAdapter(noun, store);
         localStorage.setItem(this.noun, JSON.stringify([]));
-        
-        this.store = store;
         this.store[this.noun] = {
             data: [],
             errors: [],
@@ -18,11 +16,7 @@ class LocalStoreAdapter extends StoreAdapter {
             lastRequest: null
         };
     }
-    
-    data() {
-        return this.store[this.noun].data;
-    }
-    
+
     create(item) {
         var currentItems = JSON.parse(localStorage.getItem(this.noun));
         var insertItem = Object.assign({}, item, {id: this.global_count++});

@@ -7,8 +7,7 @@ class RestApiStoreAdapter extends StoreAdapter {
     }
     
     setupAdapter(noun, store) {
-        this.noun = noun;
-        this.store = store;
+        super.setupAdapter(noun, store);
         this.store[this.noun] = {
             data: [],
             errors: [],
@@ -16,11 +15,7 @@ class RestApiStoreAdapter extends StoreAdapter {
             lastRequest: null
         };
     }
-    
-    data() {
-        return this.store[this.noun].data;
-    }
-    
+
     create(item) {
         const requestStartTime = (new Date()).getTime();
         this.post(requestStartTime, item);
