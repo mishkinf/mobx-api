@@ -1,9 +1,9 @@
 {
   "name": "api-know",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "API Know provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "readme": "https://github.com/mishkinf/api-know/blob/master/README.md",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "files": [
     "bin",
     "build",
