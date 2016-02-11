@@ -7,37 +7,7 @@ class RestApiStoreAdapter extends StoreAdapter {
     }
     
     setupAdapter(noun, store) {
-        this.noun = noun;
-        this.store = store;
-        
-        const self = this;
-        
-        this.store[this.noun] = {
-            data: [],
-            errors: [],
-            isFetching: false,
-            lastRequest: null
-        };
-        
-        store[noun].read = function(id) {
-            self.read(id); 
-        }
-        
-        store[noun].readAll = function() {
-            self.readAll(); 
-        }
-        
-        store[noun].create = function(item) {
-            self.create(item);
-        }
-        
-        store[noun].update = function(item) {
-            self.update(item);
-        }
-        
-        store[noun].delete = function(id) {
-            self.delete(id);
-        }
+        super.setupAdapter(noun, store);
     }
 
     create(item) {
@@ -139,12 +109,10 @@ class RestApiStoreAdapter extends StoreAdapter {
                     throw new Error('Not Found');
                 }
                 
-                self.store[this.noun] = {
-                    data: json[this.noun],
-                    errors: [],
-                    isFetching: false,
-                    lastRequest: requestStartTime
-                };
+                self.store[this.noun].data = json[this.noun];
+                self.store[this.noun].errors = [];
+                self.store[this.noun].isFetching = false;
+                self.store[this.noun].lastRequest = requestStartTime;
             })
             .catch((error) => {
                 debugger;
@@ -154,12 +122,10 @@ class RestApiStoreAdapter extends StoreAdapter {
                     return;
                 }
                 
-                self.store[this.noun] = {
-                    data: [],
-                    errors: error,
-                    isFetching: false,
-                    lastRequest: null
-                };
+                self.store[this.noun].data = [];
+                self.store[this.noun].errors = [error];
+                self.store[this.noun].isFetching = false;
+                self.store[this.noun].lastRequest = null;
             });  
     }
     
