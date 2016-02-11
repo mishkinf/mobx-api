@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: './build',
     filename: '[name].js',
-    library: 'api-know',
+    library: 'mobservable-api',
     libraryTarget: 'commonjs2'
   },
 

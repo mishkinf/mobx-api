@@ -1,8 +1,8 @@
 {
-  "name": "api-know",
+  "name": "mobservable-api",
   "version": "1.0.18",
-  "description": "API Know provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
-  "readme": "https://github.com/mishkinf/api-know/blob/master/README.md",
+  "description": "Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
+  "readme": "https://github.com/mishkinf/mobservable-api/blob/master/README.md",
   "main": "build/index.js",
   "files": [
     "bin",
@@ -22,11 +22,11 @@
     "prepublish": "npm run build"
   },
   "bin": {
-    "api-know": "./bin/main.js"
+    "mobservable-api": "./bin/main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mishkinf/api-know.git"
+    "url": "git+ssh://git@github.com/mishkinf/mobservable-api.git"
   },
   "keywords": [
     "API",
@@ -37,9 +37,9 @@
   "author": "Mishkin Faustini <mishkinf@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mishkinf/api-know/issues"
+    "url": "https://github.com/mishkinf/mobservable-api/issues"
   },
-  "homepage": "https://github.com/mishkinf/api-know#readme",
+  "homepage": "https://github.com/mishkinf/mobservable-api#readme",
   "devDependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",

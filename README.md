@@ -1,4 +1,4 @@
-# api-know
+# mobservable-api
 
 ## Examples
 
@@ -6,9 +6,9 @@
 
 ## Philosophy
 
-* [Official homepage introduction](http://mishkinf.github.io/api-know)
+* [Official homepage introduction](http://mishkinf.github.io/mobservable-api)
 
-Mobservable is inspired by Microsoft Excel and existing TFRP implementations like MeteorJS tracker, knockout and Vue.js.
+Mobservable API
 
 ## What others are saying...
 
