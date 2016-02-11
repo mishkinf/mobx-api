@@ -1,6 +1,8 @@
 import RestApiStoreAdapter from './lib/rest-api-store-adapter';
 import LocalStoreAdapter from './lib/local-store-adapter';
 
+exports.LocalStoreAdapter = LocalStoreAdapter;
+exports.RestApiStoreAdapter = RestApiStoreAdapter;
 exports.registerStoreAdapter = function(store, adapter) {
     store.adapter = adapter;
     
