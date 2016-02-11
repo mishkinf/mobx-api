@@ -1,4 +1,5 @@
 import StoreAdapter from './store-adapter';
+import { fetch } from 'node-fetch';
 
 class RestApiStoreAdapter extends StoreAdapter {
     constructor(url) {
