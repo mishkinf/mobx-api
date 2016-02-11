@@ -1,6 +1,6 @@
 {
   "name": "mobservable-api",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "readme": "https://github.com/mishkinf/mobservable-api/blob/master/README.md",
   "main": "build/index.js",
@@ -12,7 +12,6 @@
     ".babelrc",
     "webpack.config.js"
   ],
-
   "scripts": {
     "build": "rimraf build && webpack",
     "prestart": "npm run build",
@@ -48,5 +47,8 @@
     "mocha": "^2.4.5",
     "rimraf": "^2.5.1",
     "webpack": "^1.12.12"
+  },
+  "dependencies": {
+    "mobservable": "^1.2.4"
   }
 }

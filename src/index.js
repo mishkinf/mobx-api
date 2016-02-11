@@ -1,3 +1,4 @@
+import { transaction } from "mobservable";
 import RestApiStoreAdapter from './lib/rest-api-store-adapter';
 import LocalStoreAdapter from './lib/local-store-adapter';
 import StoreAdapter from './lib/store-adapter';
@@ -13,6 +14,8 @@ exports.RegisterNoun = function(noun, store, adapter) {
         throw "Error: adapter supplied does not extend StoreAdapter"
     }
     
-    adapter.setupAdapter(noun, store);
-    store[noun] = adapter;
+    transaction(() => {
+        adapter.setupAdapter(noun, store);
+        store[noun] = adapter;
+    });
 };
