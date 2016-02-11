@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: './build',
     filename: '[name].js',
-    library: 'babel-webpack-package-boilerplate',
+    library: 'api-know',
     libraryTarget: 'commonjs2'
   },
 
