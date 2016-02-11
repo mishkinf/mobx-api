@@ -1,6 +1,6 @@
 import StoreAdapter from './store-adapter';
 
-export class LocalStoreAdapter extends StoreAdapter {
+class LocalStoreAdapter extends StoreAdapter {
     constructor(store, noun) {
         super();
         this.store = store;

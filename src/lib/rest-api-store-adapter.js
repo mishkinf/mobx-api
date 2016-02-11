@@ -1,6 +1,6 @@
 import StoreAdapter from './store-adapter';
 
-export class RestApiStoreAdapter extends StoreAdapter {
+class RestApiStoreAdapter extends StoreAdapter {
     constructor(store, noun, url) {
         super();
         this.store = store;
