@@ -1,8 +1,9 @@
 import StoreAdapter from './store-adapter';
 
 export class RestApiStoreAdapter extends StoreAdapter {
-    constructor(noun, url) {
+    constructor(store, noun, url) {
         super();
+        this.store = store;
         this.noun = noun;
         this.url = url;
     }
@@ -57,8 +58,8 @@ export class RestApiStoreAdapter extends StoreAdapter {
         .catch((error) => {
             debugger;
             
-            if(store[self.noun].lastRequest != null && requestStartTime < store[self.noun].lastRequest) {
-                console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, store[this.noun].lastRequest);
+            if(self.store[self.noun].lastRequest != null && requestStartTime < self.store[self.noun].lastRequest) {
+                console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, self.store[this.noun].lastRequest);
                 return;
             }
             
@@ -90,8 +91,8 @@ export class RestApiStoreAdapter extends StoreAdapter {
         .catch((error) => {
             debugger;
             
-            if(store[this.noun].lastRequest != null && requestStartTime < store[this.noun].lastRequest) {
-                console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, store[this.noun].lastRequest);
+            if(self.store[this.noun].lastRequest != null && requestStartTime < self.store[this.noun].lastRequest) {
+                console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, self.store[this.noun].lastRequest);
                 return;
             }
             
@@ -100,11 +101,12 @@ export class RestApiStoreAdapter extends StoreAdapter {
     }
     
     get(requestStartTime) {
+        const self = this;
         fetch(this.url + '/' + this.noun + '.json')
             .then(response => response.json())
             .then(json => {
-                if(store[this.noun].lastRequest != null && requestStartTime < store[this.noun].lastRequest) {
-                    console.log('STALE SUCCESS RESPONSE', 'this response is older than another response! ', requestStartTime, store[this.noun].lastRequest);
+                if(self.store[this.noun].lastRequest != null && requestStartTime < self.store[this.noun].lastRequest) {
+                    console.log('STALE SUCCESS RESPONSE', 'this response is older than another response! ', requestStartTime, self.store[this.noun].lastRequest);
                     return;
                 } 
                 console.log('success: ', json[this.noun]);
@@ -113,7 +115,7 @@ export class RestApiStoreAdapter extends StoreAdapter {
                     throw new Error('Not Found');
                 }
                 
-                store[this.noun] = {
+                self.store[this.noun] = {
                     data: json[this.noun],
                     errors: [],
                     isFetching: false,
@@ -123,12 +125,12 @@ export class RestApiStoreAdapter extends StoreAdapter {
             .catch((error) => {
                 debugger;
                 
-                if(store[this.noun].lastRequest != null && requestStartTime < store[this.noun].lastRequest) {
-                    console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, store[this.noun].lastRequest);
+                if(self.store[this.noun].lastRequest != null && requestStartTime < self.store[this.noun].lastRequest) {
+                    console.log('STALE ERROR RESPONSE', 'this response is older than another response! ', requestStartTime, self.store[this.noun].lastRequest);
                     return;
                 }
                 
-                store[this.noun] = {
+                self.store[this.noun] = {
                     data: [],
                     errors: error,
                     isFetching: false

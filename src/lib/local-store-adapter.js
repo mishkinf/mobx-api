@@ -3,6 +3,7 @@ import StoreAdapter from './store-adapter';
 export class LocalStoreAdapter extends StoreAdapter {
     constructor(noun) {
         super();
+        this.store = store;
         this.noun = noun;
         this.global_count = 0
 
@@ -31,8 +32,8 @@ export class LocalStoreAdapter extends StoreAdapter {
     }
     
     read_all() {
-        store[this.noun].data = JSON.parse(localStorage.getItem(this.noun)); 
-        return store[this.noun].data;
+        this.store[this.noun].data = JSON.parse(localStorage.getItem(this.noun)); 
+        return this.store[this.noun].data;
     }
     
     read(id) {
