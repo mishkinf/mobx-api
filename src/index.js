@@ -12,9 +12,6 @@ exports.RegisterNoun = function(noun, store, adapter) {
     if(adapter instanceof StoreAdapter == false) {
         throw "Error: adapter supplied does not extend StoreAdapter"
     }
-    if(store[noun] != undefined) {
-        throw "Error: ${noun} already defined in this store!";
-    }
     
     adapter.setNoun(noun);;
     store[noun] = adapter;
