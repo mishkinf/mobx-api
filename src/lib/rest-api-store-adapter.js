@@ -1,9 +1,10 @@
 import StoreAdapter from './store-adapter';
 
 class RestApiStoreAdapter extends StoreAdapter {
-    constructor(url) {
+    constructor(url, noun_singular) {
         super();
         this.url = url;
+        this.noun_singular;
     }
     
     setupAdapter(noun, store) {
