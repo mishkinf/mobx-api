@@ -44,13 +44,16 @@ class RestApiStoreAdapter extends StoreAdapter {
         } else {
             endpoint = this.url + '/' + this.noun + '/' + item.id;
         }
+        
+        var payload = {};
+        payload[this.noun] = item;
 
         fetch(endpoint,
         {
             mode: 'cors', 
             method: method,
             headers: headers,
-            body: JSON.stringify({ article: item })
+            body: JSON.stringify(payload)
         })
         .then(response => {
             self.readAll();            
