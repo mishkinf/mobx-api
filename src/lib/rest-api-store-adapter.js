@@ -47,7 +47,7 @@ class RestApiStoreAdapter extends StoreAdapter {
         }
         
         var payload = {};
-        payload[this.noun] = item;
+        payload[this.noun_singular] = item;
 
         fetch(endpoint,
         {
