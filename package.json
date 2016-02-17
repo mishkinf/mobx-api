@@ -1,6 +1,6 @@
 {
   "name": "mobservable-api",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "readme": "https://github.com/mishkinf/mobservable-api/blob/master/README.md",
   "main": "build/index.js",
@@ -49,6 +49,6 @@
     "webpack": "^1.12.12"
   },
   "dependencies": {
-    "axios": "^0.9.1"
+    "node-fetch": "^1.3.3"
   }
 }
