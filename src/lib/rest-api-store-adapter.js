@@ -1,10 +1,10 @@
 import StoreAdapter from './store-adapter';
 
 class RestApiStoreAdapter extends StoreAdapter {
-    constructor(url, noun_singular) {
+    constructor(url, nounSingular) {
         super();
         this.url = url;
-        this.noun_singular;
+        this.nounSingular = nounSingular;
     }
     
     setupAdapter(noun, store) {
@@ -47,7 +47,7 @@ class RestApiStoreAdapter extends StoreAdapter {
         }
         
         var payload = {};
-        payload[this.noun_singular] = item;
+        payload[this.nounSingular] = item;
 
         fetch(endpoint,
         {
