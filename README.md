@@ -10,14 +10,14 @@ Using a truly RESTful api (see the provided [example Ruby on Rails api](https://
 ```javascript
 // store.js
 import {observable, autorun, isObservable} from 'mobservable';
-import {LocalStoreAdapter, RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
+import {RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
 
 const apiHost = 'http://localhost:3001/api';
 const store = observable({
     articles: { }
 });
 
-RegisterNoun('articles', store, new LocalStoreAdapter());
+RegisterNoun('articles', store, new RestApiStoreAdapter(apiHost));
 
 export default store;
 ```
@@ -33,12 +33,6 @@ class ArticlesList extends Component {
             <div style={style}>
                 <button style={inputStyle} onClick={this.addArticle}>Add Article</button>
                 
-                <label style={{float:'right'}}>
-                    <Toggle
-                        defaultChecked={store.isFakeApi} 
-                        onChange={this.toggleFakeApi} />
-                        <span style={{lineHeight: '50px'}}>&nbsp;Use Fake Api</span>
-                </label>
                 <Table striped bordered condensed hover>
                     <thead>
                     <tr>
@@ -76,21 +70,11 @@ class ArticlesList extends Component {
             </div>
         );    
      }
-        
-    customValidateText(text) {
-        return (text.length > 0 && text.length < 64);
-    }
 
     updateField(data) {
         const { store } = this.props;
         console.log(data);
         store.articles.update(data);
-    }
-        
-    toggleFakeApi = (e) => {
-        const { store } = this.props;
-        store.setFakeApi(e.target.checked);
-        store.articles.readAll()
     }
 
     addArticle = (e) => {
