@@ -73,7 +73,6 @@ class ArticlesList extends Component {
 
     updateField(data) {
         const { store } = this.props;
-        console.log(data);
         store.articles.update(data);
     }
 
