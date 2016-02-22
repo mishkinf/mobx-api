@@ -6,7 +6,7 @@ Mobeservable API provides an easy interface to perform CRUD operations against A
 * Example: Look at the [mobservable-api-example](https://github.com/mishkinf/mobservable-api-example).
 
 ### RESTful API Integration
-Using a truly RESTful api, we can connect our mobservable stores to an api by simply:
+Using a truly RESTful api (see the provided [example Ruby on Rails api](https://github.com/mishkinf/rails_api_example)), we leverage a mobservable api adapter with our mobservable stores to an api by simply:
 ```javascript
 // store.js
 import {observable, autorun, isObservable} from 'mobservable';
@@ -99,6 +99,36 @@ class ArticlesList extends Component {
         store.articles.create(fakeArticle);
     }
 };
+```
+## Types of Adapters in mobservable-api
+#### RestApiStoreAdapter
+A mobservable-api adapter to leverage a RESTFul api (currently using the fetch api). 
+```javascript
+import {observable, autorun, isObservable} from 'mobservable';
+import {RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
+
+const apiHost = 'http://localhost:3001/api';
+const store = observable({
+    articles: { }
+});
+
+RegisterNoun('articles', store, new RestApiStoreAdapter(apiHost));
+
+export default store;
+```
+#### LocalStoreAdapter
+A mobservable-api adapter to leverage your browsers localstorage.
+```javascript
+import {observable, autorun, isObservable} from 'mobservable';
+import {LocalStoreAdapter, RegisterNoun } from 'mobservable-api';
+
+const store = observable({
+    articles: { }
+});
+
+RegisterNoun('articles', store, new LocalStoreAdapter()) :
+
+export default store;
 ```
 
 ## Philosophy
