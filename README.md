@@ -115,7 +115,7 @@ export default store;
 ```
 
 ## Philosophy
-Mobserable API attempts to abstract the data layer into a standard interface in which all CRUD operations can be performed. 
+Mobserable API attempts to abstract the data layer into a standard interface in which all CRUD operations can be performed with as little boilerplate as possible. In contradiction, Redux has a relatively high amount of boilerplate when communicating with relatively standard types of back-ends (APIs, ElasticSearch, etc..)
 
 * [Official homepage introduction](http://mishkinf.github.io/mobservable-api)
 
