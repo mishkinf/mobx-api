@@ -9,7 +9,7 @@ Mobeservable API provides an easy interface to perform CRUD operations against A
 Using a truly RESTful api (see the provided [example Ruby on Rails api](https://github.com/mishkinf/rails_api_example)), we leverage a mobservable api adapter with our mobservable stores to an api by simply:
 ```javascript
 // store.js
-import {observable, autorun, isObservable} from 'mobservable';
+import {observable} from 'mobservable';
 import {RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
 
 const apiHost = 'http://localhost:3001/api';
@@ -87,7 +87,7 @@ class ArticlesList extends Component {
 #### RestApiStoreAdapter
 A mobservable-api adapter to leverage a RESTFul api (currently using the fetch api). 
 ```javascript
-import {observable, autorun, isObservable} from 'mobservable';
+import {observable} from 'mobservable';
 import {RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
 
 const apiHost = 'http://localhost:3001/api';
@@ -102,7 +102,7 @@ export default store;
 #### LocalStoreAdapter
 A mobservable-api adapter to leverage your browsers localstorage.
 ```javascript
-import {observable, autorun, isObservable} from 'mobservable';
+import {observable} from 'mobservable';
 import {LocalStoreAdapter, RegisterNoun } from 'mobservable-api';
 
 const store = observable({
