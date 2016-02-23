@@ -1,4 +1,6 @@
 # mobservable-api
+[![npm version](https://badge.fury.io/js/mobservable-api.svg)](https://badge.fury.io/js/mobservable-api)
+
 Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. The design of mobservable-api is to inspire writing code that is very clear and boilerplate-free when handling calls to APIs. 
 
 ## Examples
