@@ -83,7 +83,7 @@ class ArticlesList extends Component {
     }
 };
 ```
-## Types of Adapters in mobservable-api
+## Adapters in mobservable-api
 #### RestApiStoreAdapter
 A mobservable-api adapter to leverage a RESTFul api (currently using the fetch api). 
 ```javascript
@@ -112,6 +112,38 @@ const store = observable({
 RegisterNoun('articles', store, new LocalStoreAdapter()) :
 
 export default store;
+```
+## Write your own adapter
+With mobservable-api it's easy to write your own adapter to connect to any type of server / data store. Mobservable api leverages a simple interface to support CRUD operations. Please refer to the implementation of LocalStorageAdapter or RestApiStoreAdapter for a more specific example. The class below shows what functions to implement in order to create your own adapter.
+```javascript
+import StoreAdapter from './store-adapter';
+
+class SampleStoreAdapter extends StoreAdapter {
+    constructor() {
+        super();
+    }
+    
+    setupAdapter(noun, store) {
+        super.setupAdapter(noun, store);
+        // initialize your store
+    }
+
+    create(item) {
+        // Make async or synchronous call to any API and then mutate the mobservable store
+    }
+    
+    update(item) {
+        // Make async or synchronous call to any API and then mutate the mobservable store
+    }
+    
+    readAll() {
+        // Make async or synchronous call to any API and fetch all times then mutate the mobservable store
+    }
+    
+    delete(id) {
+       // Make async or synchronous call to any API and delete object from store in your success callback
+    }
+}
 ```
 
 ## Philosophy
