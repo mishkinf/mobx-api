@@ -1,18 +1,18 @@
-# mobservable-api
-[![npm version](https://badge.fury.io/js/mobservable-api.svg)](https://badge.fury.io/js/mobservable-api)
+# mobx-api
+[![npm version](https://badge.fury.io/js/mobx-api.svg)](https://badge.fury.io/js/mobx-api)
 
-Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. The design of mobservable-api is to inspire writing code that is very clear and boilerplate-free when handling calls to APIs. 
+Mobx API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. The design of mobx-api is to inspire writing code that is very clear and boilerplate-free when handling calls to APIs.
 
 ## Examples
 
-* Example: Look at the [mobservable-api-example](https://github.com/mishkinf/mobservable-api-example).
+* Example: Look at the [mobx-api-example](https://github.com/mishkinf/mobx-api-example).
 
 ### RESTful API Integration
-Using a truly RESTful api (see the provided [example Ruby on Rails api](https://github.com/mishkinf/rails_api_example)), we leverage a mobservable api adapter with our mobservable stores to an api by simply:
+Using a truly RESTful api (see the provided [example Ruby on Rails api](https://github.com/mishkinf/rails_api_example)), we leverage a mobx api adapter with our mobx stores to an api by simply:
 ```javascript
 // store.js
-import {observable} from 'mobservable';
-import {RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
+import {observable} from 'mobx';
+import {RestApiStoreAdapter, RegisterNoun } from 'mobx-api';
 
 const apiHost = 'http://localhost:3001/api';
 const store = observable({
@@ -30,11 +30,11 @@ class ArticlesList extends Component {
      render() {
         const { store } = this.props;
         const articles = store.articles;
-         
+
         return (
             <div style={style}>
                 <button style={inputStyle} onClick={this.addArticle}>Add Article</button>
-                
+
                 <Table striped bordered condensed hover>
                     <thead>
                     <tr>
@@ -48,7 +48,7 @@ class ArticlesList extends Component {
                     {articles.data.map(article => {
                         return (<tr key={article.id}>
                             <td>{article.id}</td>
-                            <td> 
+                            <td>
                                 <InlineEdit
                                     activeClassName="editing"
                                     text={article.title}
@@ -85,12 +85,12 @@ class ArticlesList extends Component {
     }
 };
 ```
-## Adapters in mobservable-api
+## Adapters in mobx-api
 #### RestApiStoreAdapter
-A mobservable-api adapter to leverage a RESTFul api (currently using the fetch api). 
+A mobx-api adapter to leverage a RESTFul api (currently using the fetch api).
 ```javascript
-import {observable} from 'mobservable';
-import {RestApiStoreAdapter, RegisterNoun } from 'mobservable-api';
+import {observable} from 'mobx';
+import {RestApiStoreAdapter, RegisterNoun } from 'mobx-api';
 
 const apiHost = 'http://localhost:3001/api';
 const store = observable({
@@ -102,10 +102,10 @@ RegisterNoun('articles', store, new RestApiStoreAdapter(apiHost));
 export default store;
 ```
 #### LocalStoreAdapter
-A mobservable-api adapter to leverage your browsers localstorage.
+A mobx-api adapter to leverage your browsers localstorage.
 ```javascript
-import {observable} from 'mobservable';
-import {LocalStoreAdapter, RegisterNoun } from 'mobservable-api';
+import {observable} from 'mobx';
+import {LocalStoreAdapter, RegisterNoun } from 'mobx-api';
 
 const store = observable({
     articles: { }
@@ -116,7 +116,7 @@ RegisterNoun('articles', store, new LocalStoreAdapter()) :
 export default store;
 ```
 ## Write your own adapter
-With mobservable-api it's easy to write your own adapter to connect to any type of server / data store. Mobservable api leverages a simple interface to support CRUD operations. Please refer to the implementation of LocalStorageAdapter or RestApiStoreAdapter for a more specific example. The class below shows what functions to implement in order to create your own adapter.
+With mobx-api it's easy to write your own adapter to connect to any type of server / data store. mobx api leverages a simple interface to support CRUD operations. Please refer to the implementation of LocalStorageAdapter or RestApiStoreAdapter for a more specific example. The class below shows what functions to implement in order to create your own adapter.
 ```javascript
 import StoreAdapter from './store-adapter';
 
@@ -124,24 +124,24 @@ class SampleStoreAdapter extends StoreAdapter {
     constructor() {
         super();
     }
-    
+
     setupAdapter(noun, store) {
         super.setupAdapter(noun, store);
         // initialize your store
     }
 
     create(item) {
-        // Make async or synchronous call to any API and then mutate the mobservable store
+        // Make async or synchronous call to any API and then mutate the mobx store
     }
-    
+
     update(item) {
-        // Make async or synchronous call to any API and then mutate the mobservable store
+        // Make async or synchronous call to any API and then mutate the mobx store
     }
-    
+
     readAll() {
-        // Make async or synchronous call to any API and fetch all times then mutate the mobservable store
+        // Make async or synchronous call to any API and fetch all times then mutate the mobx store
     }
-    
+
     delete(id) {
        // Make async or synchronous call to any API and delete object from store in your success callback
     }
@@ -151,7 +151,7 @@ class SampleStoreAdapter extends StoreAdapter {
 ## Philosophy
 Mobserable API attempts to abstract the data layer into a standard interface in which all CRUD operations can be performed with as little boilerplate as possible. In contradiction, Redux has a relatively high amount of boilerplate when communicating with relatively standard types of back-ends (APIs, ElasticSearch, etc..)
 
-Mobservable API
+mobx API
 
 ## What others are saying...
 

@@ -1,8 +1,8 @@
 {
-  "name": "mobservable-api",
-  "version": "1.0.40",
-  "description": "Mobeservable API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
-  "readme": "https://github.com/mishkinf/mobservable-api/blob/master/README.md",
+  "name": "mobx-api",
+  "version": "1.1.0",
+  "description": "Mobx API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
+  "readme": "https://github.com/mishkinf/mobx-api/blob/master/README.md",
   "main": "build/index.js",
   "files": [
     "bin",
@@ -21,11 +21,11 @@
     "prepublish": "npm run build"
   },
   "bin": {
-    "mobservable-api": "./bin/main.js"
+    "mobx-api": "./bin/main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mishkinf/mobservable-api.git"
+    "url": "git+ssh://git@github.com/mishkinf/mobx-api.git"
   },
   "keywords": [
     "API",
@@ -36,9 +36,9 @@
   "author": "Mishkin Faustini <mishkinf@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mishkinf/mobservable-api/issues"
+    "url": "https://github.com/mishkinf/mobx-api/issues"
   },
-  "homepage": "https://github.com/mishkinf/mobservable-api#readme",
+  "homepage": "https://github.com/mishkinf/mobx-api#readme",
   "devDependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",

@@ -7,7 +7,7 @@ exports.RestApiStoreAdapter = RestApiStoreAdapter;
 
 exports.RegisterNoun = function(noun, store, adapter) {
     if(noun == undefined || store == undefined || adapter == undefined) {
-        throw "You must supply a noun, store and adapter. Please refer to mobservable-api documentation!";
+        throw "You must supply a noun, store and adapter. Please refer to mobx-api documentation!";
     }
     if(adapter instanceof StoreAdapter == false) {
         throw "Error: adapter supplied does not extend StoreAdapter"

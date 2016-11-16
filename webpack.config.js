@@ -6,8 +6,7 @@ module.exports = {
   debug: false,
 
   entry: {
-    index: './src/index.js',
-    test: './test/index.js'
+    index: './src/index.js'
   },
 
   target: 'async-node',
@@ -17,7 +16,7 @@ module.exports = {
   output: {
     path: './build',
     filename: '[name].js',
-    library: 'mobservable-api',
+    library: 'mobx-api',
     libraryTarget: 'commonjs2'
   },
 
