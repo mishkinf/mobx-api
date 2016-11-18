@@ -1,6 +1,6 @@
-class LocalStoreAdapter {
+class SessionStoreAdapter {
   action(store, verb, noun, item) {
-    const currentItems = JSON.parse(localStorage.getItem(noun)) || [];
+    const currentItems = JSON.parse(sessionStorage.getItem(noun)) || [];
     const currentItem = item ? currentItems.find(i => i.id === item.id) : null;
     const currentStore = store[noun];
 
@@ -11,34 +11,33 @@ class LocalStoreAdapter {
 
       case 'post':
         const countKey = noun + '_count';
-        const previousCount = parseInt(localStorage.getItem(countKey)) || 0;
+        const previousCount = parseInt(sessionStorage.getItem(countKey)) || 0;
         const updatedCount =  previousCount + 1;
-        localStorage.setItem(countKey, updatedCount);
+        sessionStorage.setItem(countKey, updatedCount);
 
         var insertItem = Object.assign({}, item, {id: updatedCount});
         currentItems.push(insertItem);
-        localStorage.setItem(noun, JSON.stringify(currentItems));
-
+        sessionStorage.setItem(noun, JSON.stringify(currentItems));
         store[noun].data = currentItems;
       break;
 
       case 'put':
         Object.assign(currentItem, {}, item);
-        localStorage.setItem(noun, JSON.stringify(currentItems));
+        sessionStorage.setItem(noun, JSON.stringify(currentItems));
         store[noun].data = currentItems;
       break;
 
       case 'delete':
         currentItems.splice(currentItems.indexOf(currentItem), 1);
-        localStorage.setItem(noun, JSON.stringify(currentItems));
+        sessionStorage.setItem(noun, JSON.stringify(currentItems));
         store[noun].data = currentItems;
       break;
     }
   }
 
   readAll(store, noun) {
-    store[noun].data = JSON.parse(localStorage.getItem(noun)) || [];
+    store[noun].data = JSON.parse(sessionStorage.getItem(noun)) || [];
   }
 }
 
-export default LocalStoreAdapter;
+export default SessionStoreAdapter;

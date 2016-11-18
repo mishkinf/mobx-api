@@ -1,11 +1,9 @@
 import StoreAdapter from './StoreAdapter';
 import axios from 'axios';
 
-class RestApiStoreAdapter extends StoreAdapter {
-  constructor(url, nounSingular) {
-    super();
+class RestApiStoreAdapter {
+  constructor(url) {
     this.url = url;
-    this.nounSingular = nounSingular;
     this.catchErrors = this.catchErrors.bind(this);
   }
 
@@ -13,56 +11,37 @@ class RestApiStoreAdapter extends StoreAdapter {
     // headers: {'Content-Type': 'application/json'}
   };
 
-  setupAdapter(noun, store) {
-    super.setupAdapter(noun, store);
-    this.endpoint = this.url + '/' + this.noun;
-    this.readAll();
-  }
-
-  create(item) {
-    this.post(item);
-  }
-
-  update(item) {
-    this.put(item);
-  }
-
-  read(id) {
-    console.warn('Read operation of RestApiStoreAdapter not implemented');
-  }
-
-  readAll() {
-    axios.get(this.endpoint, this.config)
-      .then(response => this.setData(response.data))
+  readAll(store, noun) {
+    axios.get(this.endpoint('get', noun), this.config)
+      .then(response => this.setData(store, noun, response.data))
       .catch((error) => this.catchErrors(error, 'get'));
   }
 
-  setData(data) {
-    this.store[this.noun].data = data[this.noun];
-    this.store[this.noun].errors = [];
-    this.store[this.noun].isFetching = false;
+  setData(store, noun, data) {
+    store[noun].data = data[noun];
+    store[noun].errors = [];
+    store[noun].isFetching = false;
   }
 
-  post(item) {
-    axios.post(this.endpoint, item, this.config)
-      .then(() => this.readAll())
-      .catch((error) => this.catchErrors(error, 'post', item));
+  endpoint(verb, noun, item) {
+    switch(verb) {
+      case 'post':
+      case 'get':
+        return [this.url, noun].join('/');
+
+      case 'put':
+      case 'delete':
+        return [this.url, noun, item.id].join('/');
+    }
+
+    return [this.url, noun].join('/');
   }
 
-  put(item) {
-    const putEndpoint = [this.endpoint, item.id].join('/');
-
-    axios.put(putEndpoint, item, this.config)
-      .then(() => this.readAll())
-      .catch((error) => this.catchErrors(error, 'put', item));
-  }
-
-  delete(id) {
-    const deleteEndpoint = [this.endpoint, id].join('/');
-
-    axios.delete(deleteEndpoint, this.config)
-      .then(() => this.readAll())
-      .catch((error) => this.catchErrors(error, 'delete', id));
+  action(store, verb, noun, item) {
+    const endpoint = this.endpoint(verb, noun, item);
+    axios[verb](endpoint, item, this.config)
+      .then(() => this.readAll(store, noun))
+      .catch((error) => this.catchErrors(error, verb, item));
   }
 
   catchErrors = (error, action, data) => {

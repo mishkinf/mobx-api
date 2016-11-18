@@ -1,45 +1,27 @@
 class StoreAdapter {
-    constructor() {
-        if(this.create === undefined) { throw new TypeError('Must override create method'); }
-        if(this.update === undefined) { throw new TypeError('Must override update method'); }
-        if(this.read === undefined) { throw new TypeError('Must override read method'); }
-        if(this.readAll === undefined) { throw new TypeError('Must override read method'); }
-        if(this.delete === undefined) { throw new TypeError('Must override delete method'); }
-    }
-    
-    setupAdapter(noun, store) {
-        this.noun = noun;
-        this.store = store;
-        
-        const self = this;
-        
-        this.store[this.noun] = {
-            data: [],
-            errors: [],
-            isFetching: false,
-            lastRequest: null
-        };
-        
-        store[noun].read = function(id) {
-            self.read(id); 
-        }
-        
-        store[noun].readAll = function() {
-            self.readAll(); 
-        }
-        
-        store[noun].create = function(item) {
-            self.create(item);
-        }
-        
-        store[noun].update = function(item) {
-            self.update(item);
-        }
-        
-        store[noun].delete = function(id) {
-            self.delete(id);
-        }
-    }
+  nounToAdapter = {};
+  constructor(store) {
+    this.store = store;
+  }
+
+  registerAdapter(noun, adapter) {
+    this.nounToAdapter[noun] = adapter;
+    const store = this.store;
+
+    store[noun] = {
+      data: [],
+      errors: [],
+      isFetching: false
+    };
+
+    console.log('adapter being used: ', this.nounToAdapter[noun]);
+
+    store[noun].readAll = () => this.nounToAdapter[noun].readAll(store, noun);
+    store[noun].create = (item) => this.nounToAdapter[noun].action(store, 'post', noun, item);
+    store[noun].read = (item) => this.nounToAdapter[noun].action(store, 'get', noun, item);
+    store[noun].update = (item) => this.nounToAdapter[noun].action(store, 'put', noun, item);
+    store[noun].delete = (item) => this.nounToAdapter[noun].action(store, 'delete', noun, item);
+  }
 }
 
 export default StoreAdapter;
