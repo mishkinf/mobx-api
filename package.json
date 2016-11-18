@@ -1,6 +1,6 @@
 {
   "name": "mobx-api",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Mobx API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "readme": "https://github.com/mishkinf/mobx-api/blob/master/README.md",
   "main": "build/index.js",
@@ -46,6 +46,13 @@
     "babel-preset-stage-0": "^6.3.13",
     "mocha": "^2.4.5",
     "rimraf": "^2.5.1",
+    "fs": "0.0.1-security",
     "webpack": "^1.12.12"
+  },
+  "dependencies": {
+    "axios": "^0.15.2",
+    "fs": "0.0.1-security",
+    "json-loader": "^0.5.4",
+    "net": "^1.0.2"
   }
 }

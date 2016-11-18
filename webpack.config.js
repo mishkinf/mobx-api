@@ -9,7 +9,7 @@ module.exports = {
     index: './src/index.js'
   },
 
-  target: 'async-node',
+  // target: 'async-node',
 
   devtool: 'source-map',
 
@@ -35,10 +35,10 @@ module.exports = {
         path.resolve(__dirname, './test')
       ],
       exclude: /node_modules/,
-      loader: 'babel'
+      loader: 'babel-loader'
     }, {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
     }]
   }
 
