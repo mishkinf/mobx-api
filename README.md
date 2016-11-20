@@ -27,10 +27,19 @@ export default store;
 ```
 ...and then we can simply leverage our api in React Components...
 ```javascript
+import React, {Component, PropTypes} from 'react';
+import {observer} from 'mobx-react';
+
 @observer
 class ArticlesList extends Component {
+  static propTypes = {
+    articles: PropTypes.object.isRequired,
+    isFakeApi: PropTypes.bool.isRequired,
+    setFakeApi: PropTypes.func.isRequired
+  };
+
   render() {
-    const { store: { articles }, store } = this.props;
+    const { articles , isFakeApi } = this.props;
 
     return (
       <div style={styles.main}>
@@ -39,7 +48,7 @@ class ArticlesList extends Component {
         <br/>
 
         <label style={styles.toggle}>
-          <Toggle defaultChecked={store.isFakeApi} onChange={this.toggleFakeApi} /> Use Fake Api
+          <Toggle defaultChecked={isFakeApi} onChange={this.toggleFakeApi} /> Use Fake Api
         </label>
 
         { articles.data.length > 0 ? this.renderArticlesTable() : <h3>There are no articles yet!</h3>}
@@ -67,7 +76,7 @@ class ArticlesList extends Component {
   }
 
   renderArticles() {
-    const { store: { articles }, store } = this.props;
+    const { articles } = this.props;
 
     return articles.data.map(article => {
       return (
@@ -87,7 +96,7 @@ class ArticlesList extends Component {
               paramName="author"
               change={(data) => this.updateField({id: article.id, author: data.author})} />
           </td>
-          <td><button onClick={() => store.articles.delete(article)}>Delete</button></td>
+          <td><button onClick={() => articles.delete(article)}>Delete</button></td>
         </tr>);
       }
     );
@@ -98,20 +107,13 @@ class ArticlesList extends Component {
   }
 
   updateField(data) {
-    const { store: { articles } } = this.props;
+    const { articles } = this.props;
 
     articles.update(data);
   }
 
-  toggleFakeApi = (e) => {
-    const { store: { setFakeApi, articles } } = this.props;
-
-    setFakeApi(e.target.checked);
-    articles.readAll()
-  }
-
   addArticle = (e) => {
-    const { store: { articles } } = this.props;
+    const { articles } = this.props;
 
     const fakeArticle = { title: Faker.commerce.productName(), author: Faker.name.findName() };
     articles.create(fakeArticle);
