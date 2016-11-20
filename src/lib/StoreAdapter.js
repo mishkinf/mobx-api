@@ -14,8 +14,6 @@ class StoreAdapter {
       isFetching: false
     };
 
-    console.log('adapter being used: ', this.nounToAdapter[noun]);
-
     store[noun].readAll = () => this.nounToAdapter[noun].readAll(store, noun);
     store[noun].create = (item) => this.nounToAdapter[noun].action(store, 'post', noun, item);
     store[noun].read = (item) => this.nounToAdapter[noun].action(store, 'get', noun, item);
