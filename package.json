@@ -1,6 +1,6 @@
 {
   "name": "mobx-api",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Mobx API provides an easy interface to perform CRUD operations against APIs, localstorage, etc.. ",
   "readme": "https://github.com/mishkinf/mobx-api/blob/master/README.md",
   "main": "build/index.js",

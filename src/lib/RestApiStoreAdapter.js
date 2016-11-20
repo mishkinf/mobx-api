@@ -2,19 +2,23 @@ import StoreAdapter from './StoreAdapter';
 import axios from 'axios';
 
 class RestApiStoreAdapter {
-  constructor(url) {
+  constructor(url, headers) {
     this.url = url;
-    this.catchErrors = this.catchErrors.bind(this);
+    this.headers = headers;
   }
 
-  config = {
-    // headers: {'Content-Type': 'application/json'}
-  };
+  getConfig() {
+    return {
+      headers: this.headers || {}
+    };
+  }
 
   readAll(store, noun) {
-    axios.get(this.endpoint('get', noun), this.config)
-      .then(response => this.setData(store, noun, response.data))
-      .catch((error) => this.catchErrors(error, 'get'));
+    store[noun].errors = [];
+    store[noun].isFetching = true;
+
+    return axios.get(this.endpoint('get', noun), this.getConfig())
+      .then(response => this.setData(store, noun, response.data));
   }
 
   setData(store, noun, data) {
@@ -39,14 +43,9 @@ class RestApiStoreAdapter {
 
   action(store, verb, noun, item) {
     const endpoint = this.endpoint(verb, noun, item);
-    axios[verb](endpoint, item, this.config)
-      .then(() => this.readAll(store, noun))
-      .catch((error) => this.catchErrors(error, verb, item));
+    return axios[verb](endpoint, item, this.getConfig())
+      .then(() => this.readAll(store, noun));
   }
-
-  catchErrors = (error, action, data) => {
-    console.error('Request Failed for noun: ', this.noun, ', Action: ', action, data);
-  };
 }
 
 export default RestApiStoreAdapter;
